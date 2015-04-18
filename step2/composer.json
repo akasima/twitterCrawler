@@ -1,0 +1,19 @@
+{
+  "name": "akasima/twitterCrawler",
+  "authors": [
+    {
+      "name": "akasima",
+      "email": "akasima@gmail.com"
+    }
+  ],
+  "require": {
+    "phpunit/phpunit": "~4.0",
+    "mockery/mockery": "dev-master@dev",
+	"abraham/twitteroauth": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "Akasima\\": "src"
+    }
+  }
+}
