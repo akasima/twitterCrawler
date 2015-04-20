@@ -26,3 +26,7 @@ function shortTime($date)
         return date('Y년 j월', $dst);
     }
 }
+
+spl_autoload_register(function($class) {
+    include sprintf('%s/classes/%s.php', __DIR__, $class);
+});

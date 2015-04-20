@@ -94,18 +94,15 @@
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills pull-right">
-                <li role="presentation" class="active"><a href="./">Home</a></li>
-                <li role="presentation"><a href="./week">Week</a></li>
+                <li role="presentation"><a href="./">Home</a></li>
+                <li role="presentation" class="active"><a href="./week">Week</a></li>
             </ul>
         </nav>
         <h3 class="text-muted">Twitter Crawler</h3>
     </div>
     <div class="jumbotron">
-        <h1>Today Tweet</h1>
-        <p class="lead"></p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up!</a></p>
+        <h1>Weekly Hot</h1>
     </div>
-
 
     <table class="table table-hover">
         <thead>

@@ -10,7 +10,6 @@ $UTC = new DateTimeZone("UTC");
 $newTZ = new DateTimeZone("Asia/Seoul");
 date_default_timezone_set("Asia/Seoul");
 
-// autoload가 없넨..
 include_once('vendor/abraham/twitteroauth/src/Util/JsonDecoder.php');
 include_once('vendor/abraham/twitteroauth/src/Config.php');
 include_once('vendor/abraham/twitteroauth/src/Consumer.php');
