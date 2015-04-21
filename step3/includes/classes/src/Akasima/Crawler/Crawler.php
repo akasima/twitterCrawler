@@ -1,6 +1,8 @@
 <?php
 namespace Akasima\Crawler;
 
+use Abraham\TwitterOAuth\TwitterOAuth;
+
 class Crawler
 {
 

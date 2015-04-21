@@ -54,7 +54,7 @@ class CrawlerRepository
         $prepare = "SELECT * FROM tweet WHERE id=:id";
         $statement = $this->pdo->prepare($prepare);
         $statement->execute([
-            ':id' => $item->user->id +123
+            ':id' => $item->user->id
         ]);
 
         return $statement->rowCount();

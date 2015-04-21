@@ -4,7 +4,12 @@ $crawler = new Akasima\Crawler\Crawler(
     new Akasima\Crawler\CrawlerRepository($pdo)
 );
 
-$crawler->oauth(new Akasima\Crawler\TwitterOAuth($config));
+$crawler->oauth(new Abraham\TwitterOAuth\TwitterOAuth(
+    $config['twitter']['consumerKey'],
+    $config['twitter']['consumerSecret'],
+    $config['twitter']['accessToken'],
+    $config['twitter']['accessTokenSecret']
+));
 
 // get home time line
 $items = $crawler->homeTimeLine();

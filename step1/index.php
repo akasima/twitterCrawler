@@ -76,7 +76,7 @@ foreach ($items as $item) {
     $prepare = "SELECT * FROM tweet WHERE id=:id";
     $statement = $pdo->prepare($prepare);
     $statement->execute([
-        ':id' => $item->user->id +123
+        ':id' => $item->user->id
     ]);
 
     if ($statement->rowCount() == 0) {
