@@ -57,8 +57,5 @@ class CrawlerTest extends PHPUnit_Framework_TestCase
         $items = $this->crawler->homeTimeLine($this->con);
 
         $this->crawler->storeTweets($items);
-
-        // 데이터를 넣는데.. 어떻게 테스트 할까??
-        $this->assertFalse(isset($items->errors));
     }
 }

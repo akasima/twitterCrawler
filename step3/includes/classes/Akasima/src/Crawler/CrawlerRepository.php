@@ -121,6 +121,55 @@ class CrawlerRepository
         return $rows;
     }
 
+    public function countMyTweet($item)
+    {
+        $prepare = "SELECT * FROM my_tweet WHERE id=:id";
+        $statement = $this->pdo->prepare($prepare);
+        $statement->execute([
+            ':id' => $item->user->id
+        ]);
+
+        return $statement->rowCount();
+    }
+
+    public function insertMyTweet($item)
+    {
+        global $newTZ, $UTC;
+
+        $date = new DateTime( $item->created_at, $UTC );
+        $date->setTimezone( $newTZ );
+        $created_at = $date->format('Y-m-d H:i:s');
+
+        $prepare = "INSERT INTO my_tweet (id, user_id, screen_name, content, retweet_count, created_at ) VALUES (:id, :user_id, :screen_name, :content, :retweet_count, :created_at) ";
+        $statement = $this->pdo->prepare($prepare);
+        $statement->execute([
+            ':id' => $item->id,
+            ':user_id' => $item->user->id,
+            ':screen_name' => $item->user->screen_name,
+            ':content' => $item->text,
+            ':retweet_count' => $item->retweet_count,
+            ':created_at' => $created_at
+        ]);
+    }
+
+    public function updateMyTweet($item)
+    {
+        global $newTZ, $UTC;
+
+        $date = new DateTime( $item->created_at, $UTC );
+        $date->setTimezone( $newTZ );
+        $created_at = $date->format('Y-m-d H:i:s');
+
+        $prepare = "UPDATE my_tweet SET screen_name=:screen_name, content=:content, retweet_count=:retweet_count WHERE id=:id ";
+        $statement = $this->pdo->prepare($prepare);
+        $statement->execute([
+            ':screen_name' => $item->user->screen_name,
+            ':content' => $item->text,
+            ':retweet_count' => $item->retweet_count,
+            ':created_at' => $created_at
+        ]);
+    }
+
     public function getUsersByIds($userIds)
     {
         $ids = implode(',', array_keys($userIds));

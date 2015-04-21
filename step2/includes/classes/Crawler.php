@@ -29,9 +29,7 @@ class Crawler
     public function homeTimeLine($con, $options = ['count' => 200])
     {
         // get home time line
-        $items = $con->get('statuses/home_timeline', [
-            $options
-        ]);
+        $items = $con->get('statuses/home_timeline', $options);
 
         if (isset($items->errors)) {
 
@@ -50,9 +48,7 @@ class Crawler
         }
 
         // get home time line
-        $items = $con->get('statuses/user_timeline', [
-            $options
-        ]);
+        $items = $con->get('statuses/user_timeline', $options);
 
         if (isset($items->errors)) {
 
@@ -88,6 +84,24 @@ class Crawler
             $this->repo->insertTweet($item);
         } else {
             $this->repo->updateTweet($item);
+        }
+    }
+
+    public function storeMyTweets($items)
+    {
+        foreach ($items as $item) {
+            $this->storeMyTweet($item);
+        }
+    }
+
+    public function storeMyTweet($item)
+    {
+        $this->storeUser($item);
+
+        if ($this->repo->countMyTweet($item) == 0) {
+            $this->repo->insertMyTweet($item);
+        } else {
+            $this->repo->updateMyTweet($item);
         }
     }
 

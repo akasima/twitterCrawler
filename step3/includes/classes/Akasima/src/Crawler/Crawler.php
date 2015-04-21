@@ -32,9 +32,7 @@ class Crawler
     public function homeTimeLine($options = ['count' => 200])
     {
         // get home time line
-        $items = $this->con->get('statuses/home_timeline', [
-            $options
-        ]);
+        $items = $this->con->get('statuses/home_timeline', $options);
 
         if (isset($items->errors)) {
 
@@ -49,13 +47,11 @@ class Crawler
     public function userTimeLine($options = ['count' => 200])
     {
         if (isset($options['user_id']) !== true) {
-            throw new \Exception('User emtpy');
+            throw new Exceptions\UserIdRequiredException;
         }
 
         // get home time line
-        $items = $this->con->get('statuses/user_timeline', [
-            $options
-        ]);
+        $items = $this->con->get('statuses/user_timeline', $options);
 
         if (isset($items->errors)) {
 
@@ -91,6 +87,24 @@ class Crawler
             $this->repo->insertTweet($item);
         } else {
             $this->repo->updateTweet($item);
+        }
+    }
+
+    public function storeMyTweets($items)
+    {
+        foreach ($items as $item) {
+            $this->storeMyTweet($item);
+        }
+    }
+
+    public function storeMyTweet($item)
+    {
+        $this->storeUser($item);
+
+        if ($this->repo->countMyTweet($item) == 0) {
+            $this->repo->insertMyTweet($item);
+        } else {
+            $this->repo->updateMyTweet($item);
         }
     }
 
